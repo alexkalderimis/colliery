@@ -1,5 +1,7 @@
 (ns colliery.models.util
-  (:use [korma.core :only (sqlfn insert values)]))
+  (:use
+    [korma.core :only (sqlfn where insert values)]
+    korma.extensions))
 
 (defn ensure-id
   "Make sure the model has an id"
@@ -15,11 +17,12 @@
 
 (defn versioned
   "Make sure that the version is updated"
-  [version-table]
+  [originals versions & [pks] ]
   (fn [{:keys [revision id deleted_at] :as input}]
-    (let [bumped (if (and revision id (not deleted_at))
-                   (update-in input [:revision] inc)
-                   input)]
-      (insert version-table (values input))
-      bumped)))
+    (let [pks (if (empty? pks) [:id] pks)]
+      (cond
+          (and revision id (not deleted_at)) (do 
+              (insert versions (values (select-one originals (where (select-keys input pks)))))
+              (update-in input [:revision] inc))
+          :else input))))
 

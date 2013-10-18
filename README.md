@@ -1,8 +1,12 @@
 # colliery
 
-A Clojure library designed to ... well, that part is up to you.
+The data store that runs the workflow history mechanism of the new steps UI.
 
 ## Usage
+
+``` sh
+lein run
+```
 
 FIXME
 

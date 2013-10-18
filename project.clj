@@ -13,6 +13,7 @@
     [org.clojure/clojure "1.4.0"]
     [log4j "1.2.15" :exclusions [javax.mail/mail javax.jms/jms com.sun.jdmk/jmxtools com.sun.jmx/jmxri]]
     [postgresql "9.1-901.jdbc4"] ;; db driver
+    [com.cemerick/friend "0.2.0"] ;; security
     [org.clojure/tools.logging "0.2.6"] ;; logging
     [org.clojure/java.jdbc "0.2.2"] ;; Korma wants this, lobos wants 0.1.1. Korma wins
     [environ "0.4.0"] ;; manage config variables

@@ -40,3 +40,21 @@
           (drop (indirection-tbl :steps :histories))
           (drop (table :steps))))
 
+(defmigration add-roles-table
+  (up [] (create (table :roles
+                        (uuid-key)
+                        (varchar :name 50 :unique)))
+         (create (indirection-tbl :users :roles)))
+  (down []
+        (drop (indirection-tbl :users :roles))
+        (drop (table :roles))))
+
+(defmigration add-intermine-accounts
+  (up [] (create (tbl :intermine-accounts
+                      (varchar :token 100)
+                      (varchar :uri 200)
+                      (timestamp :last_accessed)
+                      (belongs-to :users))))
+  (down [] (drop (table :intermine-accounts))))
+
+           

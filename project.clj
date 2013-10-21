@@ -5,7 +5,9 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :main colliery.core
   :source-paths ["src"]
+  :test-paths ["test"]
   :resource-paths ["resources"]
+  :test-selectors {:all (constantly true) :db :db}
   :plugins [
     [lein-bikeshed "0.1.3"]
     [lein-environ "0.4.0"]]
